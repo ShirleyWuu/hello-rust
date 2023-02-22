@@ -1,6 +1,6 @@
 use std::io::{self, ErrorKind, Read, Write};
 use std::net::TcpStream;
-use sd::sync::mpsc::{self, TryRecvError};
+use std::sync::mpsc::{self, TryRecvError};
 use std::thread;
 use std::time::Duration;
 
@@ -28,7 +28,7 @@ fn main() {
             }
         }
 
-        match receicer.try_recv() {
+        match receiver.try_recv() {
             Ok(msg) => {
                 let mut buf = msg.clone().into_bytes();
                 buf.resize(MSG_SIZE, 0);
